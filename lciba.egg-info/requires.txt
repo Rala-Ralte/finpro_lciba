@@ -1,0 +1,12 @@
+torch>=2.6.0
+torchvision
+numpy<2.0.0
+matplotlib>=3.7.0
+Pillow
+tqdm
+pandas
+pyyaml
+grad-cam
+ftfy
+regex
+transformers

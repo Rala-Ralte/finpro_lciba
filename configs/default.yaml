@@ -1,0 +1,73 @@
+configs/default.yaml:
+
+model:
+  clip_variant: "ViT-B/32"       
+  device: "cuda"                 
+
+
+
+data:
+  data_path: "data/conceptual_captions.tsv"
+  images_dir: "images/"
+  samples: 500                    # Number of samples for evaluation
+  image_size: 224    
+  data_path: "data/coco_val500.tsv"# CLIP input size (do not change)
+
+# IBA Hyperparameters 
+
+iba:
+  # Vision encoder settings
+  vlayer:      9                  # Target transformer block (0-indexed)
+  vbeta:       0.1                
+  vvar:        1.0                
+  vlr:         1.0                # Adam learning rate
+  vsteps:      10                 # Optimization steps
+  # Text encoder settings
+  tlayer:      9
+  tbeta:       0.1
+  tvar:        1.0
+  tlr:         1.0
+  tsteps:      10
+  batch_size:  10                 
+  progbar:     false             
+
+# LC-IBA Specific
+
+lciba:
+  prior_strength: 3.0             # Logit scaling
+  use_libragrad:  true            # Option A
+  libragrad_init: true            # Option B
+
+outputs:
+  base_dir:       "outputs/"
+  heatmaps_dir:   "outputs/heatmaps/"
+  metrics_dir:    "outputs/metrics/"
+  logs_dir:       "outputs/logs/"
+  save_heatmaps:  true            
+  results_csv:    "outputs/metrics/results.csv"
+
+eval:
+  metrics:
+    - vdrop                       # Drop in confidence (vision)
+    - vincr                       # Increase in confidence (vision)
+    - tdrop                       # Drop in confidence (text)
+    - tincr                       # Increase in confidence (text)
+  text_percentile: 50             # Binarization threshold for text map
+
+
+compare:
+  methods:
+    - m2ib
+    - lciba
+    - libragrad
+    - fusion
+    - chefer
+  save_comparison_grid: true      
+
+# Experiment: benchmark_layers
+
+benchmark:
+  layer_range: [6, 7, 8, 9, 10]   
+  method: "lciba"                       # Method to benchmark
+  metric: "vdrop"                       # Primary metric to optimize
+  samples: 100                          # Fewer samples for speed

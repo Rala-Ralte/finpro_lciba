@@ -1,0 +1,30 @@
+cp run_roar_plus.py experiments/
+cd /media/crk/vol3/rt/lciba
+
+# Default: 5 methods, both modalities (separate scores), 5 repeats
+python experiments/run_roar_plus.py --samples 500
+
+# Quick sanity test first (recommended)
+python experiments/run_roar_plus.py --samples 100 --repeats 2 --epochs 5 --methods lciba m2ib
+
+
+
+```bash
+python experiments/run_perturbation_auc.py --samples 500
+```
+
+```bash
+python experiments/run_perturbation_auc.py --samples 500 --positive_pert
+```
+
+=Completed: 653/700
+Errors:    0
+Skipped (model wrong at step 0): 47
+
+python experiments/run_roar_plus.py --samples 500 --repeats 5 --epochs 5 --methods lciba m2ib libragrad fusion 
+chefer
+
+
+  
+  
+  

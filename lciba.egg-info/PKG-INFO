@@ -1,0 +1,20 @@
+Metadata-Version: 2.4
+Name: lciba
+Version: 0.1.0
+Summary: LC-IBA: LibraGrad-Enhanced Multimodal Information Bottleneck Attribution for Vision-Language Models
+Requires-Python: >=3.11
+Requires-Dist: torch>=2.6.0
+Requires-Dist: torchvision
+Requires-Dist: numpy<2.0.0
+Requires-Dist: matplotlib>=3.7.0
+Requires-Dist: Pillow
+Requires-Dist: tqdm
+Requires-Dist: pandas
+Requires-Dist: pyyaml
+Requires-Dist: grad-cam
+Requires-Dist: ftfy
+Requires-Dist: regex
+Requires-Dist: transformers
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary

@@ -1,0 +1,15 @@
+setup.py
+lciba.egg-info/PKG-INFO
+lciba.egg-info/SOURCES.txt
+lciba.egg-info/dependency_links.txt
+lciba.egg-info/requires.txt
+lciba.egg-info/top_level.txt
+scripts/__init__.py
+scripts/clip_wrapper.py
+scripts/eval.py
+scripts/hooks.py
+scripts/iba.py
+scripts/libragrad.py
+scripts/methods.py
+scripts/utils.py
+scripts/visualization.py

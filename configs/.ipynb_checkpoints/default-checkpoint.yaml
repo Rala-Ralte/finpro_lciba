@@ -1,0 +1,104 @@
+# ============================================================
+# configs/default.yaml
+#
+# Default configuration for LC-IBA experiments.
+#
+# Override any value by passing --config your_config.yaml
+# to experiment scripts, or by editing this file directly.
+# ============================================================
+
+
+# ============================================================
+# Model
+# ============================================================
+model:
+  clip_variant: "ViT-B/32"       # Options: ViT-B/32, ViT-B/16, ViT-L/14
+  device: "cuda"                  # cuda or cpu
+
+
+# ============================================================
+# Data
+# ============================================================
+data:
+  data_path: "data/conceptual_captions.tsv"
+  images_dir: "images/"
+  samples: 500                    # Number of samples for evaluation
+  image_size: 224    
+  data_path: "data/coco_val500.tsv"# CLIP input size (do not change)
+
+
+# ============================================================
+# IBA Hyperparameters (shared by M2IB and LC-IBA)
+# ============================================================
+iba:
+  # Vision encoder settings
+  vlayer:      9                  # Target transformer block (0-indexed)
+  vbeta:       0.1                # IB compression weight
+  vvar:        1.0                # Prior variance
+  vlr:         1.0                # Adam learning rate
+  vsteps:      10                 # Optimization steps
+
+  # Text encoder settings
+  tlayer:      9
+  tbeta:       0.1
+  tvar:        1.0
+  tlr:         1.0
+  tsteps:      10
+
+  batch_size:  10                 # IBA internal batch size
+  progbar:     false              # Show per-sample tqdm bar
+
+
+# ============================================================
+# LC-IBA Specific
+# ============================================================
+lciba:
+  prior_strength: 3.0             # Logit scaling for alpha init (Option B)
+  use_libragrad:  true            # Option A: corrected backward
+  libragrad_init: true            # Option B: prior initialization
+
+
+# ============================================================
+# Outputs
+# ============================================================
+outputs:
+  base_dir:       "outputs/"
+  heatmaps_dir:   "outputs/heatmaps/"
+  metrics_dir:    "outputs/metrics/"
+  logs_dir:       "outputs/logs/"
+  save_heatmaps:  true            # Save heatmap images per sample
+  results_csv:    "outputs/metrics/results.csv"
+
+
+# ============================================================
+# Evaluation Metrics
+# ============================================================
+eval:
+  metrics:
+    - vdrop                       # Drop in confidence (vision)
+    - vincr                       # Increase in confidence (vision)
+    - tdrop                       # Drop in confidence (text)
+    - tincr                       # Increase in confidence (text)
+  text_percentile: 50             # Binarization threshold for text map
+
+
+# ============================================================
+# Experiment: compare_methods
+# ============================================================
+compare:
+  methods:
+    - m2ib
+    - lciba
+    - libragrad
+    - fusion
+  save_comparison_grid: true      # Save side-by-side visualization
+
+
+# ============================================================
+# Experiment: benchmark_layers
+# ============================================================
+benchmark:
+  layer_range: [6, 7, 8, 9, 10]   # Layers to sweep
+  method: "lciba"                       # Method to benchmark
+  metric: "vdrop"                       # Primary metric to optimize
+  samples: 100                          # Fewer samples for speed

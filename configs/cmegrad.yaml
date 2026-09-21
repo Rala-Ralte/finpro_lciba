@@ -1,0 +1,39 @@
+configs/cmegrad.yaml
+
+model:
+  lxmert_name:   "unc-nlp/lxmert-vqa-uncased"
+  tokenizer_name: "unc-nlp/lxmert-base-uncased"
+  hf_cache:      "/media/crk/vol3/hf_cache"
+  max_length:    20
+data:
+  coco_dir:      "/media/crk/vol3/rt/coco"
+  coco_val_dir:  "/media/crk/vol3/rt/coco/val2017"
+  vqa_q_path:    "/media/crk/vol3/rt/coco/v2_OpenEnded_mscoco_val2014_questions.json"
+  vqa_a_path:    "/media/crk/vol3/rt/coco/v2_mscoco_val2014_annotations.json"
+  feat_tsv:      "/media/crk/vol3/rt/lxmert_data/mscoco_imgfeat/val2014_obj36.tsv"
+  samples:       500
+  seed:          42
+cmegrad:
+  bridge_layers: [0, 1, 2, 3, 4]
+  refine_alpha:  0.15
+  top_k_vis:     3
+visualization:
+  sigma:         15
+  top_k:         3
+  max_width:     100
+  max_height:    4
+  fontsize:      13
+  dpi:           150
+outputs:
+  base_dir:      "/media/crk/vol3/rt/lciba/outputs/cmegrad"
+  heatmaps_dir:  "/media/crk/vol3/rt/lciba/outputs/cmegrad/heatmaps"
+  results_dir:   "/media/crk/vol3/rt/lciba/outputs/cmegrad/results"
+  results_json:  "/media/crk/vol3/rt/lciba/outputs/cmegrad/results/cmaes_500.json"
+demo:
+  examples:
+    - image_id: 39769
+      question:  "how many cats are there?"
+    - image_id: 397133
+      question:  "what color cloth is the man wearing?"
+    - image_id: 37777
+      question:  "what is on the table?"
