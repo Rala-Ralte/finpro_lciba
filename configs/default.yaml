@@ -11,7 +11,7 @@ data:
   images_dir: "images/"
   samples: 500                    # Number of samples for evaluation
   image_size: 224    
-  data_path: "data/coco_val500.tsv"# CLIP input size (do not change)
+  data_path: "data/coco_val500.tsv"
 
 # IBA Hyperparameters 
 
