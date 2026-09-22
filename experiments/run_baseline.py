@@ -6,7 +6,7 @@ from tqdm import tqdm
 from PIL import Image
 from random import sample
 
-# from copy import deepcopy
+
 # import matplotlib.pyplot as plt
 # import random
 
