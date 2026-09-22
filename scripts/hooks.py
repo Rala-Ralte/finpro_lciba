@@ -61,9 +61,9 @@ def layernorm_backward_hook(
 # CLIP attention is a little annoying here
 #
 # original:
-# x = x + self.attention(self.ln_1(x))
+
 #
-# q/k/v are all same tensor
+
 #
 # don't touch forward values, only make backward use V
 def _libra_permute_then_forward(
